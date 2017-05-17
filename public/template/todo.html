@@ -10,9 +10,9 @@
     <!-- <script src="../bower_components/packery/dist/packery.pkgd.min.js" type="text/javascript"></script> -->
     <!-- <script src="../bower_components/draggabilly/dist/draggabilly.pkgd.min.js" ></script> -->
     <link rel="stylesheet" href="assets/todo.css">
-    <script src="../bower_components/packery/dist/packery.pkgd.min.js" type="text/javascript"></script> -->
-     <script src="../bower_components/draggabilly/dist/draggabilly.pkgd.min.js" ></script>
-     <script src="controller/todo.js"></script>
+    <!-- <script src="../bower_components/packery/dist/packery.pkgd.min.js" type="text/javascript"></script> -->
+     <!-- <script src="../bower_components/draggabilly/dist/draggabilly.pkgd.min.js" ></script>
+     <script src="controller/todo.js"></script> --> -->
 <body id="body1">
 
     <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar11" role="navigation">
@@ -96,20 +96,31 @@
                     <div class="row" style="margin-top:60px">
                         <div class="col-lg-12">
                             <div id="containerbox">
-                                <div class="header" contenteditable="true" placeholder="Title" id="title"></div>
+                                <div class="header" contenteditable1 contenteditable="true" placeholder="Title" ng-click="title11()" ng-model="title"></div>
                                 <div id="body">
-                                    <div class="mainbody" contenteditable="true" placeholder="Take a note" id="body11"></div>
-                                    <div class="footer" style="position:relative">
+                                    <div class="mainbody ng-hide" contenteditable1 contenteditable="true" placeholder="Take a note" ng-model="body11" ng-show="myvalue"></div>
+                                    <div class="footer ng-hide" style="position:relative" ng-show="myvalue">
                                         <a ><span class="glyphicon glyphicon-hand-up" aria-hidden="true">
-                              <button type="button" id="done">DONE</button>
+                              <button type="button" ng-click="done()" id="done">DONE</button>
                             </div>
                           </div>
                         </div>
                         </div>
                     </div>
                     <!-- <div class="row"> -->
+
                             <div class="container"  id="container" >
-                        </div>
+                              <div class="row">
+                                <div class="col-sm-4" >
+                              <div class="w3-panel w3-card" id="card" ng-repeat="x in records" >
+                                <div class ="title" ng-bind-html="x.title"></div>
+                                <br>
+
+                          <div class="body" ng-bind-html="x.bodyContent"></div>
+</div>
+                    </div>
+                  </div>
+                  </div>
                         <div class="modal fade" id="myModal" role="dialog">
      <div class="modal-dialog">
        <!-- Modal content-->

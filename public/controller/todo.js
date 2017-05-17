@@ -14,52 +14,52 @@ listView();
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
-    $("#body").hide();
-    $("#title").click(function(e) {
-        $("#body").show();
-    });
-    $("#done").click(function(e) {
-        $("#body").hide();
-        var title = $("#title").html();
-        var bodydata = $("#body11").html();
-        var data = {};
-        data["title"] = title;
-        data["bodyContent"] = bodydata;
-        if (title == "" && bodydata == "") {
-            return;
-        }
-        addCard(data);
-        $('#title').html("");
-        $("#body11").html("");
-    });
+    // $("#body").hide();
+    // $("#title").click(function(e) {
+    //     $("#body").show();
+    // });
+    // $("#done").click(function(e) {
+    //     $("#body").hide();
+    //     var title = $("#title").html();
+    //     var bodydata = $("#body11").html();
+    //     var data = {};
+    //     data["title"] = title;
+    //     data["bodyContent"] = bodydata;
+    //     if (title == "" && bodydata == "") {
+    //         return;
+    //     }
+    //     addCard(data);
+    //     $('#title').html("");
+    //     $("#body11").html("");
+    // });
 
-    function addCard(data1) {
-        $.ajax({
-            type: "POST",
-            data: data1,
-            dataType: "json",
-            url: "/addcard",
-            success: function(response) {
-                console.log('page was not loaded', response);
-                if(localStorage.getItem("view")=="gridview")
-                {
-                localStorage.setItem("view","gridview");
-                $("#container").html("");
-                gridView();
-              }else {
-                localStorage.setItem("view","listView");
-                $("#container").html("");
-                listView();
-              }
-            },
-            error: function(error) {
-                console.log('page was not loaded', error);
-            },
-            complete: function(xhr, status) {
-                console.log('request is completed');
-            }
-        });
-    }
+    // function addCard(data1) {
+    //     $.ajax({
+    //         type: "POST",
+    //         data: data1,
+    //         dataType: "json",
+    //         url: "/addcard",
+    //         success: function(response) {
+    //             console.log('page was not loaded', response);
+    //             if(localStorage.getItem("view")=="gridview")
+    //             {
+    //             localStorage.setItem("view","gridview");
+    //             $("#container").html("");
+    //             gridView();
+    //           }else {
+    //             localStorage.setItem("view","listView");
+    //             $("#container").html("");
+    //             listView();
+    //           }
+    //         },
+    //         error: function(error) {
+    //             console.log('page was not loaded', error);
+    //         },
+    //         complete: function(xhr, status) {
+    //             console.log('request is completed');
+    //         }
+    //     });
+    // }
     $("#title").keypress(function(e) {
         if (e.which == 13) {
             $("#body11").focus();
@@ -101,18 +101,17 @@ function getData(view) {
         success: function(response) {
             for (var i = 0; i < response.msg.length; i++) {
                 var id11 = response.msg[i]._id;
-                //response.msg[i].bodyContent.length;
-if(response.msg[i].bodyContent.length<10)
-{
-  console.log(response.msg[i].bodyContent.length);
-  $("#cardbody").css("font-size","30px");
-}
-else
-{
-  $("#cardbody").css("font-size","15px");
-}
 
-                var MyDom = $("<div>").addClass(view).attr('id', view).append('<div class="w3-panel w3-card" id="card"><br><div id="title"><b>&nbsp&nbsp&nbsp&nbsp' + response.msg[i].title + '</b></div><div id="cardbody"><br>&nbsp&nbsp&nbsp&nbsp' + response.msg[i].bodyContent + '</div></div>').data(response.msg[i]).unbind("click").dblclick(function() {
+// if(response.msg[i].bodyContent.length<10)
+// {
+//   console.log(response.msg[i].bodyContent.length);
+//   $(".cardbody").css("font-size","30px");
+// }
+// else
+// {
+//   $(".cardbody").css("font-size","15px");
+// }
+  var MyDom = $("<div>").addClass(view).attr('id', view).append('<div class="w3-panel w3-card" id="card"><br><div id="title"><b>&nbsp&nbsp&nbsp&nbsp' + response.msg[i].title + '</b></div><div class = "cardbody"><br>&nbsp&nbsp&nbsp&nbsp' + response.msg[i].bodyContent + '</div></div>').data(response.msg[i]).unbind("click").dblclick(function() {
                   var todoData = $(this).data();
                   $('#myModal').modal();
                   console.log($("#modelbody"));
@@ -159,6 +158,7 @@ else
                   });
 
                 });
+
                 $("#container").prepend(MyDom);
                 $("#card").append("<span class='glyphicon glyphicon-trash' aria-hidden='true' id='trash' ontouchstart=deleteCard('" + id11 + "') onclick = deleteCard('" + id11 + "')></span>");
                 var elem = document.querySelector('#container');

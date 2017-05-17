@@ -11,6 +11,7 @@ router.post('/', function(req, res) {
             title: req.body.title,
             bodyContent: req.body.bodyContent
         }
+        console.log(data);
         addcard.addCardData(data, function(err, data) {
           console.log(err);
             // console.log(data.id1);
