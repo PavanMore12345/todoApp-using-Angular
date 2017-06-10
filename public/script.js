@@ -1,30 +1,30 @@
-// var scotchApp = angular.module('scotchApp', []);
-    var app = angular.module('app', ['ngRoute']);
+//var scotchApp = angular.module('scotchApp', []);
+var app = angular.module('app', ['ui.router', 'ngSanitize', 'ui.bootstrap', 'ui.bootstrap.datetimepicker', 'ngImgCrop'])
+  .config(function($stateProvider, $urlRouterProvider) {
 
-       // configure our routes
-       app.config(function($routeProvider) {
-           $routeProvider
 
-               // route for the home page
-               .when('/', {
-                   templateUrl : 'index.html',
-                   controller  : 'mainController'
-               })
-               .when('/login', {
-                   templateUrl : 'template/login.html',
-                   controller  : 'loginController'
-               })
-               .when('/todopage', {
-                   templateUrl : 'template/todo.html',
-                     controller  : 'todoController'
-               })
+    $stateProvider.state('todo', {
+        url: '/todo',
+        templateUrl: 'template/todo.html',
+         controller: 'todoController'
 
-               // route for the contact page
-               .when('/signup', {
-                   templateUrl : 'template/signup.html',
-                    controller  : 'signupController'
-               });
-       });
+      })
+      .state('login', {
+        url: '/login',
+        templateUrl: 'template/login.html',
+         controller: 'loginController'
+
+      }).state('signup', {
+        url: '/signup',
+        templateUrl: 'template/signup.html',
+         controller: 'signupController',
+        // onEnter: function() {
+        //   console.log('inside signup');
+        // }
+      })
+    $urlRouterProvider.otherwise('/login');
+
+  })
        app.directive('contenteditable1', [function() {
     return {
         require: '?ngModel',

@@ -4,6 +4,7 @@ var validators= require('mongoose-validators');
 var mongooseFieldEncryption = require('mongoose-field-encryption').fieldEncryption;
 var mongooseFieldEncryption1 = require('mongoose-field-encryption');
 var connect1 = mongo.connect('mongodb://127.0.0.1/mydb2');
+
 autoIncrement.initialize(connect1);
 var Schema = mongo.Schema;
 var userSchema = Schema({
@@ -33,7 +34,13 @@ var userSchema = Schema({
    {
    author: String,
    date: Date
- }
+ },
+ originalImage: {
+       type:String
+   },
+   cropedImage: {
+     type:String
+   }
 },{collection: "userReg"});
 userSchema.plugin(autoIncrement.plugin, {
     model: 'User',
@@ -50,9 +57,9 @@ this.findOne({email:email1,password:encrypted}, callback);
 //console.log(this.findOne({email:email1,password:encrypted}));
 };
 
-userSchema.statics.saveUser = function(data , callback)
-{
+userSchema.statics.saveUser = function(data , callback){
 //  console.log("dssfsfs");
+console.log(data);
   var self =this;
 self.findOne({email:data.email},function(err,exist)
 {
@@ -62,15 +69,10 @@ self.findOne({email:data.email},function(err,exist)
   }
   else
    {
-    var newUser=new self({
-     _id:data._id,
-     email:data.email,
-     password:data.password,
-     username:data.username
-    });
-    console.log(newUser);
+    var newUser=new self(data);
+    console.log("obj",newUser);
     newUser.save(callback);
-    // console.log("sdfsfs");
+    console.log("sdfsfs");
   }
 });
 }
@@ -82,5 +84,57 @@ userSchema.statics.userProfile=function(data,callback)
 
       //console.log(req.decoded.Userobj.email);
 }
+userSchema.statics.uploadProfilePic = function(userId, url, cb) {
+
+    this.findById(userId, function(err, user) {
+        // console.log("inside function",user);
+        if (user) {
+
+            console.log("user",user);
+            user.originalImage = url.original;
+            user.cropedImage = url.croped;
+            // user.content = bodyData.content;
+            console.log("check",url.original);
+            user.save(cb);
+        } else {
+            cb('cant set color', err);
+        }
+    });
+  }
+    userSchema.statics.getUserData = function(id,callback)
+                {
+    console.log("id is", id);
+                    User.find({id1:id},callback);
+                  }
+
+    // this.update({
+    //     _id: userId
+    // }, {
+    //     $set: {
+    //       originalImage : url.original,
+    //       cropedImage : url.croped
+    //     }
+    // }, cb);
+//hookes for encrypt the password before saving
+// userSchema.pre('save', function(next) {
+//     var user = this;
+//     //encrypt password when it is changed and save
+//     if (!user.isModified('password')) {
+//       next();
+//       return;
+//     }
+//
+//     //just encrypt the password before saving
+//     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+//         if (err) return next(err);
+//         bcrypt.hash(user.password, salt, function(err, hash) {
+//             if (err) return next(err);
+//
+//             user.password = hash;
+//             // console.log("hash",hash);
+//             next();
+//         });
+//     });
+// });
 var User = connect1.model('User', userSchema);
 module.exports=User;

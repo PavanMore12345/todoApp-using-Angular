@@ -52,7 +52,7 @@ router.post('/', function(req, res) {
                         var token = jwt.sign({
                             id: Userobj._id
                         }, app.get('superSecret'), {
-                            expiresIn: 1440 * 60 // expires in 24 hours
+                            expiresIn: 1440*60 // expires in 24 hours
                         });
                         localStorage.setItem('myKey', token);
                         res.send({

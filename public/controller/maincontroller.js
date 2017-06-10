@@ -1,15 +1,24 @@
-app.controller('mainController', function($http,$scope,$location) {
-  var url='/checklogin';
-  $http.get(url)
+app.controller('mainController', function($http,$state,$scope,$rootScope) {
+  var url='/userprofile';
+  $http.post(url)
 .then(
 function(response){
+  console.log(response.data);
+
   if(response.data.status==true)
   {
-    $location.path("/todopage");
+  //  console.log(response.data.status);
+//console.log("checkdata",response.data);
+$rootScope.profilepic = response.data.croped;
+$rootScope.user_id=response.data.id;
+$rootScope.userName=response.data.username;
+$scope.userEmail=response.data.email;
+console.log("data  ",response.data);
+    $state.go("todo");
     return;
-  console.log(response);
+  //console.log(response);
 }else {
-$location.path("/login");
+$state.go("login");
 }
 },
 function(response){

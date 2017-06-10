@@ -17,13 +17,13 @@
         <ul class="nav navbar-nav navbar-right">
           <li class="active">
             <!-- <http://localhost:8096a href="#signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a> -->
-            <a href="#signup" class="hidden-xs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
-            <a href="#signup" class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
+            <a ui-sref="signup" class="hidden-xs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
+            <a ui-sref="signup" class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
           </li>
           <li class="active">
             <!-- <a href="#login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
-            <a href="#login" class="hidden-xs"><span class="glyphicon glyphicon-log-in"></span>login</a>
-            <a href="#login" class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse"><span class="glyphicon glyphicon-log-in"></span>login</a>
+            <a ui-sref="login" class="hidden-xs"><span class="glyphicon glyphicon-log-in"></span>login</a>
+            <a ui-sref="login" class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse"><span class="glyphicon glyphicon-log-in"></span>login</a>
           </li>
         </ul>
       </div>
@@ -55,5 +55,5 @@
         <span style="color:Red;font-size:9px;" ng-show="signupForm.reenterpassword.$error.required"><span class="glyphicon glyphicon-asterisk"></span></span>
   			<input type="password" class="form-control" name="reenterpassword" ng-model="user.reEnterPassword" placeholder="ReEnter password" required>
   		</div>
-  			<button type="button" class="btn btn-block" ng-click="signupPage()" ng-disabled="signupForm.$invalid"><span class="glyphicon glyphicon-off"></span>Register</button>
+  			<button type="button" id="signin" class="btn btn-block" ng-click="signupPage()" ng-disabled="signupForm.$invalid"><span class="glyphicon glyphicon-off"></span>Register</button>
   	</form>

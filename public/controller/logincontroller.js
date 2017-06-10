@@ -1,5 +1,5 @@
 // var app = angular.module('scotchApp', []);
-app.controller('loginController', function($scope,$location,loginService) {
+app.controller('loginController', function($scope,$location,loginService,$state) {
             $scope.loginPage = function() {
               console.log("SDfssds");
                 var user = $scope.user;
@@ -11,11 +11,13 @@ app.controller('loginController', function($scope,$location,loginService) {
                     {
                     //$state.go("home");
                     alert("login success");
-                    $location.path("/todopage");
+                    $state.go("todo");
+                    // $state.go("todopage");
                   }
                   else {
                     // console.log("fgfgfd");
                     // $location.path("/signup");
+                    $state.go("login");
                     $scope.user="";
                   }
                     // $scope.user="";

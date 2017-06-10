@@ -2,9 +2,8 @@ var express      =  require("express");
   var   app          =  express();
     var validator = require('express-validator');
     var bodyParser   =  require("body-parser");
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true,limit:'50mb' }));
+app.use(bodyParser.json({limit:'50mb'}));
 app.use(validator());
 
 
@@ -15,7 +14,7 @@ app.use(express.static("./public"));
 //app.use(express.static("./public"));
 
 
-var port = 8096;
+var port = 8099;
 app.listen(port,function () {
   // connect();
   console.log("listning from the port" +port);

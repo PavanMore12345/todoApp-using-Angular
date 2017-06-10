@@ -9,7 +9,8 @@ router.post('/', function(req, res) {
         var data = {
             id1: req.decoded.id,
             title: req.body.title,
-            bodyContent: req.body.bodyContent
+            bodyContent: req.body.bodyContent,
+            color:req.body.color
         }
         console.log(data);
         addcard.addCardData(data, function(err, data) {

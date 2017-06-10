@@ -14,6 +14,18 @@ var cardSchema = Schema({
         type: String
 
     },
+    created_at: {
+       type: Date
+   },
+   updated_at: {
+       type: Date
+   },
+   color: {
+     type:String
+   },
+   reminder: {
+       type: Date
+   },
     bodyContent: {
         type: String
 
@@ -21,6 +33,65 @@ var cardSchema = Schema({
 }, {
     collection: "cardData"
 });
+cardSchema.statics.setColors = function(id,color, cb) {
+
+    this.findById(id, function(err, user) {
+          // console.log("inside function",color);
+        if (user) {
+             console.log("user",user);
+            // console.log(bodyData);
+            user.color = color.color;
+            // user.content = bodyData.content;
+            user.save(cb);
+        } else {
+            cb('cant set color', err);
+        }
+    });
+};
+cardSchema.pre('save', function(next) {
+    // get the current date
+    // console.log("pre");
+    var currentDate = new Date();
+
+    // change the updated_at field to current date
+    this.updated_at = currentDate;
+
+    // if created_at doesn't exist, add to that field
+    if (!this.created_at)
+        this.created_at = currentDate;
+
+    next();
+});
+cardSchema.statics.reminders = function(reminder, id, cb) {
+
+    this.findById(id, function(err, user) {
+        // console.log("inside function",reminder);
+        if (user) {
+            // console.log("user",user);
+            // console.log(bodyData);
+            user.reminder = reminder.time;
+            // user.content = bodyData.content;
+            user.save(cb);
+        } else {
+            cb('cant add reminder', err);
+        }
+    });
+};
+
+// Remove reminder
+cardSchema.statics.removeReminder = function(id, cb) {
+
+    this.findById(id, function(err, user) {
+        // console.log(bodyData.title);
+        if (user) {
+            console.log(user);
+            user.reminder = null;
+            user.save(cb);
+        } else {
+            cb('cant remove reminder', err);
+        }
+    });
+};
 cardSchema.statics.addCardData = function(data, callback) {
     var self = this;
     var card = new self({

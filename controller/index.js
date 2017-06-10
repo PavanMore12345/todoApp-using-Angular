@@ -10,12 +10,17 @@ router.use('/logout',require('./logout'));
 router.use('/deletecard',require('./deletecard'));
 router.use('/getDataById',require('./getDataById'));
 router.use('/updatecard',require('./updatecard'));
+router.use('/setcolor',require('./setcolor'));
 // router.use('/updatecard',require('./updatecard'));
 //router.use('/',require('./auth'));
 router.use('/addcard',require('./auth'),require('./addcard'));
+router.use('/imageload',require('./imageload'));
 //router.use('/',require('./logout'));
 router.use('/getData',require('./auth'),require('./getData'));
+router.use('/getuserdata',require('./auth'),require('./getuserdata'));
+router.use('/userprofile',require('./auth'),require('./userprofile'));
 router.use('/deletecard',require('./deletecard'));
+router.use('/reminders',require('./reminders'));
 
 
 

@@ -7,7 +7,6 @@ var userregister=require('../model/user');
 router.post('/', function(req, res) {
   console.log("abc");
   try {
-
      userregister.userProfile(req.decoded, function(err,data)
   {
     console.log(req.decoded);
@@ -16,11 +15,20 @@ router.post('/', function(req, res) {
       res.send({status:false,message:"user not available"});
     }
     else {
-      res.send({
-        id:data.id,
-        email:data.email,
-        username:data.username
-      });
+      console.log(data);
+      if (data) {
+        res.send({
+
+          id:data.id,
+          email:data.email,
+          username:data.username,
+          status:true,
+          croped:data.cropedImage,
+        original:data.originalImage
+        });
+      }else {
+        res.send({status:false,message:"user not available"});
+      }
     }
   });
   } catch (e) {

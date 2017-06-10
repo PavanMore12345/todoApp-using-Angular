@@ -12,7 +12,7 @@ router.post('/', function(req, res) {
             title: req.body.title,
             bodyContent: req.body.bodyContent
         }
-        console.log("data abc",data);
+        console.log("data abc 22",data);
         //console.log("HI HOW R U",req.params.id);
         updatecard.updateCardData(data, function(err, data) {
           console.log(err);

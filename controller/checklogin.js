@@ -4,6 +4,7 @@ var LocalStorage = require('node-localstorage').LocalStorage;
 localStorage = new LocalStorage('./scratch');
 router.get("/",function (req, res) {
   var token = localStorage.getItem('myKey');
+  console.log(req.decoded);
 console.log(token);
   //console.log(req.session);
    if(token === ""){
