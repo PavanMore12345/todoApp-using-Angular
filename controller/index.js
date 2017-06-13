@@ -21,8 +21,6 @@ router.use('/getuserdata',require('./auth'),require('./getuserdata'));
 router.use('/userprofile',require('./auth'),require('./userprofile'));
 router.use('/deletecard',require('./deletecard'));
 router.use('/reminders',require('./reminders'));
-
-
-
+router.use('/pinnote',require('./pinnote'));
 //router.use('/',require('./addcard'))
 module.exports = router;

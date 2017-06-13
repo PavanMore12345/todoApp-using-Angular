@@ -254,11 +254,11 @@ border:none;
 #card
 {
   /*height: auto;*/
-  min-width:300px;
+  /*min-width:300px;*/
   min-height: 100px;
   word-wrap: break-word;
   background-color: white;
-  margin-top: 20px;
+  margin-top: 30px;
   box-shadow: 10px 10px 5px #888888;
 }
 /*#carddata
@@ -403,6 +403,10 @@ color:black;
     /*#wrapper.toggled {
         padding-left: 0;
     }*/
+    #card
+    {
+      min-width: 300px;
+    }
 
     #sidebar-wrapper {
         width: 250px;

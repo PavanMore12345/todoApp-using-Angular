@@ -73,7 +73,6 @@ $scope.listview = function() {
     // $scope.showlist = true;
   //  $scope.divchange="addCardList";
     $scope.class="col-lg-12 item";
-
     $scope.grid = {
         "display": "block"
     }
@@ -87,7 +86,7 @@ $scope.gridview = function() {
     // $scope.showgrid = true;
     // $scope.showlist = false;
     //$scope.divchange="addCard";
-    $scope.class="col-sm-6 col-md-4 item";
+    $scope.class=" col-md-4 item";
     $scope.grid = {
         "display": "none"
     }
@@ -278,18 +277,20 @@ $scope.delete =function(id)
 {
 });
 }
-// $scope.list = function()
-// {
-//   console.log("sss");
-//   if($scope.class == "col-sm-6 col-sm-4 item ")
-//   {
-//     $scope.class="col-lg-12 item";
-//   }
-//   else {
-//     $scope.class = "col-sm-6 col-sm-4 item "
-//   }
-//
-// }
+$scope.pinned_note = function(pin_id,pinvalue)
+{
+  var url = "/pinnote/" + pin_id + "";
+     var action = "POST";
+     var data = {
+       value: pinvalue
+     }
+     todoService.app(url, action, data).then(function(data) {
+       console.log(data.data.status);
+       $rootScope.getData11();
+     }).catch(function(error) {
+       console.log(error);
+     })
+}
 
 $scope.update = function(id11)
 {

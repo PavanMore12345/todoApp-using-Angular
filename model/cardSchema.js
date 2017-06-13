@@ -29,7 +29,11 @@ var cardSchema = Schema({
     bodyContent: {
         type: String
 
-    }
+    },
+    pin_note:
+    {
+      type:Boolean
+    },
 }, {
     collection: "cardData"
 });
@@ -126,6 +130,17 @@ console.log("id is", id);
      User.update({ _id: data.id }, { $set: {title:data.title,bodyContent:data.bodyContent}},callback);
     // card.save(callback);
   }
+  cardSchema.statics.pinnedData= function(note_id,booleanvalue, callback)
+  {
+  // console.log("Boolean value",booleanvalue);
+  this.update({
+    _id: note_id
+  }, {
+    $set: {
+pin_note:booleanvalue.value
+    }
+  }, callback);
+}
   // cardSchema.statics.updateCardData=function(id,callback)
   // {
   //   User.update({_id:id},{$set:{'title':'New MongoDB Tutorial'},{'body':'sdfsf'}});
